@@ -33,38 +33,42 @@ function getMatch (from, to, delay) {
         if (map.has(filePath)) {
           log(`Clearing "${filePath}" ...`)
 
-          clearTimeout(map.get(filePath))
+          const timeout = map.get(filePath)
+
+          clearTimeout(timeout)
         }
 
         log(`Queueing "${filePath}" ...`)
 
-        map.set(filePath, setTimeout(async function write () {
+        const timeout = setTimeout(async function write () {
           info('write')
 
           try {
-            map.delete(filePath)
-
             log(`Writing "${filePath}"`)
 
+            map.delete(filePath)
+
             return (
-              await writeFile(filePath, fileData.replace(pattern, to).replace(/\r\n/g, '\n'), 'utf8')
+              await writeFile(filePath, fileData.replace(pattern, to), 'utf8')
             )
-          } catch ({ message }) {
+          } catch ({ message = 'No error message defined' }) {
             error(`Error writing "${filePath}". The message was "${message}"`)
           }
-        }, delay))
-      } else {
-        map.delete(filePath)
+        }, delay)
 
+        map.set(filePath, timeout)
+      } else {
         log(`... Ignoring "${filePath}"`)
+
+        map.delete(filePath)
       }
-    } catch ({ message }) {
+    } catch ({ message = 'No error message defined' }) {
       error(`Error matching "${filePath}". The message was "${message}"`)
     }
   }
 }
 
-function handleError ({ message }) {
+function handleError ({ message = 'No error message defined' } = {}) {
   error(`Error in watcher: "${message}"`)
 }
 
