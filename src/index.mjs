@@ -24,24 +24,42 @@ function getMatch (from, to, delay) {
   return async function match (filePath) {
     info('match')
 
-    const fileData = await readFile(filePath, 'utf8')
+    try {
+      log(`Reading "${filePath}"`)
 
-    if (pattern.test(fileData)) {
-      if (map.has(filePath)) {
-        log(`Clearing "${filePath}" ...`)
+      const fileData = await readFile(filePath, 'utf8')
 
-        clearTimeout(map.get(filePath))
+      if (fileData.includes(from)) {
+        if (map.has(filePath)) {
+          log(`Clearing "${filePath}" ...`)
+
+          clearTimeout(map.get(filePath))
+        }
+
+        log(`Queueing "${filePath}" ...`)
+
+        map.set(filePath, setTimeout(async function write () {
+          info('write')
+
+          try {
+            map.delete(filePath)
+
+            log(`Writing "${filePath}"`)
+
+            return (
+              await writeFile(filePath, fileData.replace(pattern, to).replace(/\r\n/g, '\n'), 'utf8')
+            )
+          } catch ({ message }) {
+            error(`Error writing "${filePath}". The message was "${message}"`)
+          }
+        }, delay))
+      } else {
+        map.delete(filePath)
+
+        log(`... Ignoring "${filePath}"`)
       }
-
-      log(`Queueing "${filePath}" ...`)
-
-      map.set(filePath, setTimeout(async function write () {
-        log(`Writing "${filePath}"`)
-
-        return (
-          await writeFile(filePath, fileData.replace(pattern, to), 'utf8')
-        )
-      }, delay))
+    } catch ({ message }) {
+      error(`Error matching "${filePath}". The message was "${message}"`)
     }
   }
 }
