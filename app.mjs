@@ -14,6 +14,10 @@ import commander from 'commander'
 
 import watchMatch from '#watch-match'
 
+const log = debug('@sequencemedia/watch-match')
+
+log('`watch-match` is awake')
+
 const NAME = 'wm.App'
 process.title = NAME
 
@@ -40,7 +44,7 @@ async function app () {
         pid
       } = a.find(({ pid }) => pid !== PID)
 
-      const log = debug('@sequencemedia/watch-match:process:log')
+      const log = debug('@sequencemedia/watch-match:process')
 
       log(`Killing application "${name}" in process ${pid}.`)
 
@@ -52,9 +56,6 @@ async function app () {
     error(message)
     return
   }
-
-  const log = debug('@sequencemedia/watch-match')
-  const info = debug('@sequencemedia/watch-match:info')
 
   const {
     pid,
@@ -72,12 +73,26 @@ async function app () {
     version
   } = PACKAGE
 
-  commander
-    .version(version)
-    .option('-f, --from [from]', 'Change from value')
-    .option('-t, --to [to]', 'Change to value')
-    .option('-p, --path [path]', 'Path to watch')
-    .parse(argv)
+  try {
+    commander
+      .version(version)
+      .exitOverride()
+      .requiredOption('-f, --from [from]', 'Change from value')
+      .requiredOption('-t, --to [to]', 'Change to value')
+      .requiredOption('-p, --path [path]', 'Path to watch')
+      .parse(argv)
+  } catch (e) {
+    const {
+      code
+    } = e
+
+    const error = debug('@sequencemedia/watch-match:commander:error')
+
+    if (code !== 'commander.missingMandatoryOptionValue') error(e)
+
+    error(`Halting application "${name}" in process ${pid}.`)
+    return
+  }
 
   const {
     from = FROM,
@@ -85,14 +100,18 @@ async function app () {
     path = PATH
   } = commander.opts()
 
-  if (from && to && path) {
-    log(`Application "${name}" in process ${pid} watching "${path}"`)
+  log({
+    from,
+    to,
+    path
+  })
 
-    info({ from, to, path })
+  try {
+    await watchMatch(from, to, path)
+  } catch ({ message }) {
+    const error = debug('@sequencemedia/watch-match:error')
 
-    return (
-      watchMatch(from, to, path)
-    )
+    error(message)
   }
 }
 
