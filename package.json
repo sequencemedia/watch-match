@@ -47,7 +47,7 @@
     "commander": "^8.3.0",
     "cross-env": "^7.0.3",
     "debug": "^4.3.3",
-    "dotenv": "^12.0.3",
+    "dotenv": "^14.0.1",
     "ps-list": "^8.0.0"
   },
   "devDependencies": {
