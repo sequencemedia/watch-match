@@ -43,7 +43,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "chokidar": "^3.5.2",
+    "chokidar": "^3.5.3",
     "commander": "^8.3.0",
     "cross-env": "^7.0.3",
     "debug": "^4.3.3",
@@ -55,7 +55,7 @@
     "@babel/core": "^7.16.7",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/preset-env": "^7.16.8",
-    "@sequencemedia/hooks": "^1.0.22",
+    "@sequencemedia/hooks": "^1.0.23",
     "core-js": "^3.20.3",
     "eslint": "7.32.0",
     "eslint-config-standard": "^16.0.3",
