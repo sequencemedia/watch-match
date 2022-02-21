@@ -10,13 +10,17 @@ import {
 
 import psList from 'ps-list'
 
-import commander from 'commander'
+import {
+  Command
+} from 'commander'
 
 import watchMatch from '#watch-match'
 
 const log = debug('@sequencemedia/watch-match')
 
 log('`watch-match` is awake')
+
+const commander = new Command()
 
 const NAME = 'wm.App'
 process.title = NAME
