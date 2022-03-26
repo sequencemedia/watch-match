@@ -1,0 +1,23 @@
+.DS_Store
+
+.circleci
+.husky
+
+.depsrc
+
+.editorconfig
+
+.eslintignore
+.eslintrc
+
+.github
+.gitignore
+
+# NPM
+.npmignore
+.npmrc
+
+# NVM
+.nvmrc
+
+gulpfile.mjs

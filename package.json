@@ -3,6 +3,8 @@
   "version": "1.0.85",
   "description": "Watch files and transform their content",
   "keywords": [
+    "watch",
+    "match",
     "music",
     "library",
     "xml",
@@ -16,13 +18,12 @@
     "m3u",
     "m3u8"
   ],
-  "private": true,
   "main": "./app.mjs",
   "type": "module",
   "author": "Jonathan Perry for Sequence Media Limited <sequencemedia@sequencemedia.net>",
   "license": "MIT",
   "engines": {
-    "node": ">=16.13.0"
+    "node": ">=16.14.0"
   },
   "repository": {
     "type": "git",
@@ -47,8 +48,7 @@
     "commander": "^9.1.0",
     "cross-env": "^7.0.3",
     "debug": "^4.3.4",
-    "dotenv": "^16.0.0",
-    "ps-list": "^8.1.0"
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
