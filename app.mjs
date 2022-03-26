@@ -1,14 +1,10 @@
 #!/usr/bin/env node
 
-import 'dotenv/config'
-
 import debug from 'debug'
 
 import {
   readFile
 } from 'fs/promises'
-
-import psList from 'ps-list'
 
 import {
   Command
@@ -22,9 +18,6 @@ log('`watch-match` is awake')
 
 const commander = new Command()
 
-const NAME = 'wm.App'
-process.title = NAME
-
 async function app () {
   const PACKAGE = JSON.parse(await readFile('./package.json'))
 
@@ -32,43 +25,9 @@ async function app () {
     name
   } = PACKAGE
 
-  /**
-   *  Permit only one instance of the application
-   */
-  try {
-    const a = (await psList())
-      .filter(({ name }) => name === NAME)
-
-    if (a.length > 1) {
-      const {
-        pid: PID
-      } = process
-
-      const {
-        pid
-      } = a.find(({ pid }) => pid !== PID)
-
-      const log = debug('@sequencemedia/watch-match:process')
-
-      log(`Killing application "${name}" in process ${pid}.`)
-
-      process.kill(pid)
-    }
-  } catch ({ message }) {
-    const error = debug('@sequencemedia/watch-match:process:error')
-
-    error(message)
-    return
-  }
-
   const {
     pid,
-    argv,
-    env: {
-      FROM,
-      TO,
-      PATH
-    }
+    argv
   } = process
 
   log(`Starting application "${name}" in process ${pid}.`)
@@ -99,9 +58,9 @@ async function app () {
   }
 
   const {
-    from = FROM,
-    to = TO,
-    path = PATH
+    from,
+    to,
+    path
   } = commander.opts()
 
   log({
