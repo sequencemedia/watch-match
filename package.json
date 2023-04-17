@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "chokidar": "^3.5.3",
-    "commander": "^10.0.0",
+    "commander": "^10.0.1",
     "cross-env": "^7.0.3",
     "debug": "^4.3.4"
   },
@@ -54,7 +54,7 @@
     "@babel/core": "^7.21.4",
     "@babel/eslint-parser": "^7.21.3",
     "@babel/preset-env": "^7.21.4",
-    "@sequencemedia/hooks": "^1.0.386",
+    "@sequencemedia/hooks": "^1.0.387",
     "core-js": "^3.30.1",
     "eslint": "^8.38.0",
     "eslint-config-standard": "^17.0.0",
