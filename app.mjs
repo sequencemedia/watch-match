@@ -3,40 +3,34 @@
 import debug from 'debug'
 
 import {
-  readFile
-} from 'fs/promises'
-
-import {
   Command
 } from 'commander'
 
 import watchMatch from '#watch-match'
 
+import PACKAGE from './package.json' assert { type: 'json' }
+
 const log = debug('@sequencemedia/watch-match')
 
-log('`watch-match` is awake')
-
-const commander = new Command()
-
 async function app () {
-  const PACKAGE = JSON.parse(await readFile('./package.json'))
-
   const {
-    name
-  } = PACKAGE
-
-  const {
-    pid,
-    argv
-  } = process
-
-  log(`Starting application "${name}" in process ${pid}.`)
-
-  const {
+    name,
     version
   } = PACKAGE
 
+  const {
+    pid
+  } = process
+
+  log(`Starting application "${name} (${version})" in process ${pid}.`)
+
+  const commander = new Command()
+
   try {
+    const {
+      argv
+    } = process
+
     commander
       .version(version)
       .exitOverride()
@@ -53,7 +47,7 @@ async function app () {
 
     if (code !== 'commander.missingMandatoryOptionValue') error(e)
 
-    error(`Halting application "${name}" in process ${pid}.`)
+    error(`Halting application "${name} (${version})" in process ${pid}.`)
     return
   }
 

@@ -5,9 +5,9 @@ import chokidar from 'chokidar'
 import {
   readFile,
   writeFile
-} from 'fs/promises'
+} from 'node:fs/promises'
 
-import normalise from '#watch-match/normalise'
+import normalise from './normalise.mjs'
 
 const log = debug('@sequencemedia/watch-match')
 const error = debug('@sequencemedia/watch-match:error')

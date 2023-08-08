@@ -12,6 +12,7 @@
 *.ts text eol=lf
 *.mts text eol=lf
 *.cts text eol=lf
+*.tsx text eol=lf
 *.sh text eol=lf
 .depsrc text eol=lf
 .editorconfig text eol=lf

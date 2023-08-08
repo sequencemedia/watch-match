@@ -20,10 +20,14 @@
   ],
   "main": "./app.mjs",
   "type": "module",
-  "author": "Jonathan Perry for Sequence Media Limited <sequencemedia@sequencemedia.net>",
+  "author": {
+    "name": "Jonathan Perry for Sequence Media Limited",
+    "email": "sequencemedia@sequencemedia.net",
+    "url": "http://sequencemedia.net"
+  },
   "license": "MIT",
   "engines": {
-    "node": ">=16.14.0"
+    "node": ">=16.20.1"
   },
   "repository": {
     "type": "git",
@@ -36,8 +40,8 @@
   "scripts": {
     "lint": "eslint . --ext .mjs,.cjs",
     "lint:fix": "npm run lint -- --fix",
-    "start": "cross-env DEBUG=@sequencemedia/watch-match* NODE_ENV=production node .",
-    "start:dev": "cross-env DEBUG=@sequencemedia/watch-match* NODE_ENV=development node .",
+    "start": "cross-env NODE_OPTIONS=\"--no-warnings\" DEBUG=@sequencemedia/watch-match* NODE_ENV=production node .",
+    "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" DEBUG=@sequencemedia/watch-match* NODE_ENV=development node .",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -49,6 +53,7 @@
   "devDependencies": {
     "@babel/core": "^7.22.9",
     "@babel/eslint-parser": "^7.22.9",
+    "@babel/plugin-syntax-import-assertions": "^7.22.5",
     "@babel/preset-env": "^7.22.9",
     "@sequencemedia/hooks": "^1.0.444",
     "core-js": "^3.32.0",
