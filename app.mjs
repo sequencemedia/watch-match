@@ -34,9 +34,9 @@ async function app () {
     commander
       .version(version)
       .exitOverride()
+      .requiredOption('-p, --path [path]', 'Path to watch')
       .requiredOption('-f, --from [from]', 'Change from value')
       .requiredOption('-t, --to [to]', 'Change to value')
-      .requiredOption('-p, --path [path]', 'Path to watch')
       .parse(argv)
   } catch (e) {
     const {
@@ -52,19 +52,19 @@ async function app () {
   }
 
   const {
+    path,
     from,
-    to,
-    path
+    to
   } = commander.opts()
 
   log({
+    path,
     from,
-    to,
-    path
+    to
   })
 
   try {
-    await watchMatch(from, to, path)
+    await watchMatch(path, from, to)
   } catch ({ message }) {
     const error = debug('@sequencemedia/watch-match:error')
 

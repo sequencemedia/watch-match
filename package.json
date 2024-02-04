@@ -61,6 +61,10 @@
     "eslint-config-standard": "^17.1.0",
     "husky": "^9.0.10"
   },
+  "exports": {
+    "./watch-match": "./src/index.mjs",
+    "./watch-match/normalise": "./src/normalise.mjs"
+  },
   "imports": {
     "#watch-match": "./src/index.mjs",
     "#watch-match/normalise": "./src/normalise.mjs"
