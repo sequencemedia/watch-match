@@ -8,7 +8,7 @@ import {
 
 import watchMatch from '#watch-match'
 
-import PACKAGE from './package.json' assert { type: 'json' }
+import PACKAGE from './package.json' with { type: 'json' }
 
 const log = debug('@sequencemedia/watch-match')
 
