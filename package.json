@@ -55,12 +55,12 @@
     "@babel/eslint-parser": "^7.25.1",
     "@babel/plugin-syntax-import-assertions": "^7.24.7",
     "@babel/preset-env": "^7.25.3",
-    "@sequencemedia/eslint-config-standard": "^0.0.40",
-    "@sequencemedia/hooks": "^1.0.531",
-    "core-js": "^3.38.0",
+    "@sequencemedia/eslint-config-standard": "^0.0.41",
+    "@sequencemedia/hooks": "^1.0.532",
+    "core-js": "^3.38.1",
     "eslint": "^9.9.0",
     "globals": "^15.9.0",
-    "husky": "^9.1.4"
+    "husky": "^9.1.5"
   },
   "imports": {
     "#watch-match": "./src/index.mjs",
