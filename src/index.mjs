@@ -48,6 +48,8 @@ function handleError ({ message = 'No error message defined' } = {}) {
   error(`Error in watcher: "${message}"`)
 }
 
+log('`watch-match` is awake')
+
 /**
  * Assuming that the file system path being watched is a directory,
  * and it contains text files (of whatever file type)
