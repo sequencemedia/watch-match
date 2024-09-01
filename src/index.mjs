@@ -18,11 +18,13 @@ function * genFrom (from) {
 }
 
 async function renderTo (filePath, from, to) {
-  try {
-    log(`Reading "${filePath}"`)
+  info('renderTo')
 
+  try {
     const fileData = await readFile(filePath, 'utf8')
     if (fileData.includes(from)) {
+      log(filePath)
+
       return (
         await writeFile(filePath, fileData.replace(new RegExp(from, 'g'), to), 'utf8')
       )
@@ -75,8 +77,8 @@ export default function watchMatch (path, from, to) {
   const watch = normalise(path)
   const match = (
     Array.isArray(from)
-      ? getMatch(from, to)
-      : getMatch([from], to)
+      ? getMatch([...from], to) // shallow
+      : getMatch([from], to) // enarrayify
   )
 
   return (
