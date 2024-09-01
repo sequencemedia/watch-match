@@ -12,7 +12,7 @@ import PACKAGE from './package.json' with { type: 'json' }
 
 const log = debug('@sequencemedia/watch-match')
 
-async function app () {
+function app () {
   const {
     name,
     version
@@ -35,8 +35,8 @@ async function app () {
       .version(version)
       .exitOverride()
       .requiredOption('-p, --path [path]', 'Path to watch')
-      .requiredOption('-f, --from [from]', 'Change from value')
-      .requiredOption('-t, --to [to]', 'Change to value')
+      .requiredOption('-f, --from [froms...]', 'Change `from` value(s)')
+      .requiredOption('-t, --to [to]', 'Change `to` value')
       .parse(argv)
   } catch (e) {
     const {
@@ -64,7 +64,7 @@ async function app () {
   })
 
   try {
-    await watchMatch(path, from, to)
+    watchMatch(path, from, to)
   } catch ({ message }) {
     const error = debug('@sequencemedia/watch-match:error')
 
