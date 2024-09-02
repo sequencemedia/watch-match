@@ -13,6 +13,20 @@ const log = debug('@sequencemedia/watch-match')
 const error = debug('@sequencemedia/watch-match:error')
 const info = debug('@sequencemedia/watch-match:info')
 
+const DEFAULT_ERROR_MESSAGE = 'No error message defined'
+
+function handleRenderError (filePath, {
+  message = DEFAULT_ERROR_MESSAGE
+}) {
+  error(`Error rendering "${filePath}". The message was "${message}"`)
+}
+
+function handleWatchError ({
+  message = DEFAULT_ERROR_MESSAGE
+} = {}) {
+  error(`Error in watcher. The message was "${message}"`)
+}
+
 function * genFrom (from) {
   while (from.length) yield from.shift()
 }
@@ -29,8 +43,8 @@ async function renderTo (filePath, from, to) {
         await writeFile(filePath, fileData.replace(new RegExp(from, 'g'), to), 'utf8')
       )
     }
-  } catch ({ message = 'No error message defined' }) {
-    error(`Error matching "${filePath}". The message was "${message}"`)
+  } catch (e) {
+    handleRenderError(filePath, e)
   }
 }
 
@@ -42,10 +56,6 @@ function getMatch (from, to) {
 
     for (const f of genFrom([...from])) await renderTo(filePath, f, to)
   }
-}
-
-function handleError ({ message = 'No error message defined' } = {}) {
-  error(`Error in watcher: "${message}"`)
 }
 
 log('`watch-match` is awake')
@@ -87,6 +97,6 @@ export default function watchMatch (path, from, to) {
     chokidar.watch(watch)
       .on('add', match)
       .on('change', match)
-      .on('error', handleError)
+      .on('error', handleWatchError)
   )
 }
