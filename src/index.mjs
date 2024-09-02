@@ -17,7 +17,7 @@ const DEFAULT_ERROR_MESSAGE = 'No error message defined'
 
 function handleRenderError (filePath, {
   message = DEFAULT_ERROR_MESSAGE
-}) {
+} = {}) {
   error(`Error rendering "${filePath}". The message was "${message}"`)
 }
 
