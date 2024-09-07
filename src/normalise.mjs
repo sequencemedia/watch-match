@@ -7,5 +7,9 @@ import {
 } from 'path'
 
 export default function normalise (p) {
-  return resolve(p.trim().replace(/^~/, homedir()))
+  return (
+    resolve(
+      p.trim().replace(/^~/, homedir())
+    )
+  )
 }
