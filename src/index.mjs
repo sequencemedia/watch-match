@@ -36,6 +36,7 @@ async function renderTo (filePath, from, to) {
 
   try {
     const fileData = await readFile(filePath, 'utf8')
+
     if (fileData.includes(from)) {
       log(filePath)
 
