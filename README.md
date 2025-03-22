@@ -14,7 +14,7 @@ npm start -- \
 Or with the default export
 
 ```javascript
-import watchMatch from '@sequencemedia/watch-match/watch-match'
+import watchMatch from '@sequencemedia/watch-match'
 
 const path = '~/Documents/m3u'
 const from = '/Users/sequencemedia/Music/m4a'

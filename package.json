@@ -18,7 +18,7 @@
     "m3u",
     "m3u8"
   ],
-  "main": "./app.mjs",
+  "main": "./src/index.mjs",
   "type": "module",
   "author": {
     "name": "Jonathan Perry for Sequence Media Limited",
@@ -41,8 +41,8 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky",
-    "start": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=production node .",
-    "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development node ."
+    "start": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=production node app.mjs",
+    "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development app.mjs"
   },
   "dependencies": {
     "chokidar": "^4.0.3",
@@ -61,7 +61,7 @@
     "#watch-match/normalise": "./src/normalise.mjs"
   },
   "exports": {
-    "./watch-match": "./src/index.mjs",
-    "./watch-match/normalise": "./src/normalise.mjs"
+    ".": "./src/index.mjs",
+    "./normalise": "./src/normalise.mjs"
   }
 }
