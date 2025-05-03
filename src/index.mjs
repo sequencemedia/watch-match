@@ -31,6 +31,10 @@ function * genFrom (from) {
   while (from.length) yield from.shift()
 }
 
+function transform (fileData, from, to) {
+  return fileData.split('\n').map((line) => line.replace(new RegExp(from, 'g'), to)).join('\n')
+}
+
 async function renderTo (filePath, from, to) {
   info('renderTo')
 
@@ -41,7 +45,7 @@ async function renderTo (filePath, from, to) {
       log(filePath)
 
       return (
-        await writeFile(filePath, fileData.replace(new RegExp(from, 'g'), to), 'utf8')
+        await writeFile(filePath, transform(fileData, from, to), 'utf8')
       )
     }
   } catch (e) {
