@@ -95,7 +95,7 @@ export default function watchMatch (path, from, to) {
   )
 
   return (
-    chokidar.watch(watch)
+    chokidar.watch(watch, { awaitWriteFinish: true })
       .on('add', match)
       .on('change', match)
       .on('error', handleWatchError)
