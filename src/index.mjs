@@ -31,7 +31,7 @@ function * genFrom (from) {
   while (from.length) yield from.shift()
 }
 
-function transform (fileData, from, to) { // eslint-disable-next-line no-control-regex -- Remove control characters
+function transform (fileData, from, to) {
   return fileData.split('\n').map((line) => line.replace(new RegExp(from, 'g'), to).replace(/[^ -~]/g, '')).join('\n')
 }
 
@@ -41,7 +41,6 @@ async function renderTo (filePath, from, to) {
   try {
     const fileData = await readFile(filePath, 'utf8')
 
-    // eslint-disable-next-line no-control-regex -- Test for control characters
     if (fileData.includes(from) || /[^ -~]/.test(fileData)) {
       log(filePath)
 
