@@ -41,13 +41,9 @@ async function renderTo (filePath, from, to) {
   try {
     const fileData = await readFile(filePath, 'utf8')
 
-    if (fileData.includes(from) || /[^ -~]/.test(fileData)) {
-      log(filePath)
+    log(filePath, fileData.includes(from) || /[^ -~]/.test(fileData))
 
-      return (
-        await writeFile(filePath, transform(fileData, from, to), 'utf8')
-      )
-    }
+    if (fileData.includes(from) || /[^ -~]/.test(fileData)) await writeFile(filePath, transform(fileData, from, to), 'utf8')
   } catch (e) {
     handleRenderError(filePath, e)
   }
