@@ -32,7 +32,7 @@ function * genFrom (from) {
 }
 
 function transform (fileData, from, to) { // eslint-disable-next-line no-control-regex -- Remove control characters
-  return fileData.split('\n').map((line) => line.replace(new RegExp(from, 'g'), to)).replace(/[\u0000-\u001F\u007F-\u009F]/g, '').join('\n')
+  return fileData.split('\n').map((line) => line.replace(new RegExp(from, 'g'), to).replace(/[^ -~]/g, '')).join('\n')
 }
 
 async function renderTo (filePath, from, to) {
@@ -42,7 +42,7 @@ async function renderTo (filePath, from, to) {
     const fileData = await readFile(filePath, 'utf8')
 
     // eslint-disable-next-line no-control-regex -- Test for control characters
-    if (fileData.includes(from) || /[\u0000-\u001F\u007F-\u009F]/.test(fileData)) {
+    if (fileData.includes(from) || /[^ -~]/.test(fileData)) {
       log(filePath)
 
       return (
