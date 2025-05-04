@@ -22,15 +22,15 @@ const log = debug('@sequencemedia/watch-match')
 
 log('`watch-match` is awake')
 
-function app () {
+async function app () {
+  const {
+    pid
+  } = process
+
   const {
     name,
     version
   } = PACKAGE
-
-  const {
-    pid
-  } = process
 
   log(`Starting application "${name} (${version})" in process ${pid}.`)
 

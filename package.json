@@ -45,6 +45,7 @@
     "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development app.mjs"
   },
   "dependencies": {
+    "@sequencemedia/lsof": "^0.0.0",
     "chokidar": "^4.0.3",
     "commander": "^13.1.0",
     "cross-env": "^7.0.3",
@@ -57,6 +58,7 @@
     "husky": "^9.1.7"
   },
   "imports": {
+    "#where-am-i": "./where-am-i.mjs",
     "#watch-match": "./src/index.mjs",
     "#watch-match/normalise": "./src/normalise.mjs"
   },
