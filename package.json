@@ -42,7 +42,8 @@
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky",
     "start": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=production node app.mjs",
-    "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development app.mjs"
+    "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development node app.mjs",
+    "kill-me-now": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=production node kill-me-now.mjs"
   },
   "dependencies": {
     "@sequencemedia/lsof": "^0.0.0",
