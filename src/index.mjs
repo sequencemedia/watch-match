@@ -34,12 +34,20 @@ function * genFrom (from) {
 }
 
 function mapTransformFromTo (from, to) {
+  info('mapTransformFromTo')
+
   return function transformFromTo (value) {
+    info('transformFromTo')
+
+    log(value)
+
     return value.replace(new RegExp(from, 'g'), to).trim()
   }
 }
 
 function transform (fileData, from, to) {
+  info('transform')
+
   return fileData.split(CR).map(mapTransformFromTo(from, to)).join(CR).trim() + NL
 }
 
@@ -50,7 +58,7 @@ async function renderTo (filePath, from, to) {
     const fileData = await readFile(filePath, 'utf8')
     const hasMatch = fileData.includes(from)
 
-    log(hasMatch)
+    log(from, hasMatch, to)
 
     if (hasMatch) await writeFile(filePath, transform(fileData, from, to), 'utf8')
   } catch (e) {
@@ -74,8 +82,8 @@ function getMatch (from, to) {
 
 log('`watch-match` is awake')
 
-function ignored (filePath = '.', stat) {
-  if (filePath && stat) return stat.isFile() && !filePath.endsWith('.m3u8')
+function ignored (filePath, stat) {
+  if (filePath && stat) return (!filePath.endsWith('.m3u8')) && stat.isFile()
   return false
 }
 
