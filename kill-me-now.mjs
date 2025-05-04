@@ -65,8 +65,16 @@ function forEach ({ PROCESS: pid }) {
     process.kill(pid)
 
     log(`Killing application in process ${pid} succeeded.`)
-  } catch ({ code }) {
-    if (code !== 'ESRCH') log(`Killing application in process ${pid} failed.`)
+  } catch (e) {
+    const {
+      code
+    } = e
+
+    const error = debug('@sequencemedia/watch-match:error')
+
+    if (code !== 'ESRCH') error(e)
+
+    error(`Killing application in process ${pid} failed.`)
   }
 }
 
