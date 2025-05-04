@@ -64,6 +64,10 @@ function getMatch (from, to) {
 
 log('`watch-match` is awake')
 
+function ignored (filePath = '.') {
+  return !filePath.endsWith('.m3u8')
+}
+
 /**
  * Assuming that the file system path being watched is a directory,
  * and it contains text files (of whatever file type)
@@ -98,7 +102,7 @@ export default function watchMatch (path, from, to) {
   )
 
   return (
-    chokidar.watch(watch, { awaitWriteFinish: true })
+    chokidar.watch(watch, { awaitWriteFinish: true, ignored })
       .on('add', match)
       .on('change', match)
       .on('error', handleWatchError)
