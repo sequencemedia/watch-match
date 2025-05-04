@@ -80,27 +80,27 @@ function ignored (filePath = '.', stat) {
 }
 
 /**
- * Assuming that the file system path being watched is a directory,
- * and it contains text files (of whatever file type)
+ *  Assuming that the file system path being watched is a directory,
+ *  and it contains text files (of whatever file type)
  *
- * Parameter `path` is the file system path to watch. It should be a
- * directory path
+ *  Parameter `path` is the file system path to watch. It should be a
+ *  directory path
  *
- * Parameter `from` are the strings to match (or, since they will be applied to
- * a `RegExp` constructor, the regular expressions expressed as a string)
+ *  Parameter `from` are the strings to match (or, since they will be applied to
+ *  a `RegExp` constructor, the regular expressions expressed as a string)
  *
- * Parameter `to` is the string with which to replace the match
+ *  Parameter `to` is the string with which to replace the match
  *
- * In its simplest form:
+ *  In its simplest form:
  *
- *    fileData.replace(new RegExp(from, 'g'), to)
+ *     fileData.replace(new RegExp(from, 'g'), to)
  *
- * Where `fileData` is the contents of a file contained in directory `path`
+ *  Where `fileData` is the contents of a file contained in directory `path`
  *
- * @param {string} path the file system path to watch
- * @param {string | string[]} from the string/strings to match
- * @param {string} to the string with which to replace the match
- * @returns {chokidar.FSWatcher}
+ *  @param {string} path the file system path to watch
+ *  @param {string | string[]} from the string/strings to match
+ *  @param {string} to the string with which to replace the match
+ *  @returns {chokidar.FSWatcher}
  */
 export default function watchMatch (path, from, to) {
   log('watchMatch')
