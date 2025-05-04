@@ -49,7 +49,7 @@ async function renderTo (filePath, from, to) {
     const fileData = await readFile(filePath, 'utf8')
     const hasMatch = fileData.includes(from)
 
-    log(filePath, hasMatch)
+    log(hasMatch)
 
     if (hasMatch) await writeFile(filePath, transform(fileData, from, to), 'utf8')
   } catch (e) {
@@ -65,14 +65,17 @@ function getMatch (from, to) {
 
     const F = [...from].filter(Boolean)
 
+    log(filePath)
+
     for (const f of genFrom(F)) await renderTo(filePath, f, to)
   }
 }
 
 log('`watch-match` is awake')
 
-function ignored (filePath = '.') {
-  return !filePath.endsWith('.m3u8')
+function ignored (filePath = '.', stat) {
+  if (filePath && stat) return stat.isFile() && !filePath.endsWith('.m3u8')
+  return false
 }
 
 /**
