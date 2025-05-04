@@ -32,7 +32,7 @@ function * genFrom (from) {
 }
 
 function transform (fileData, from, to) {
-  return fileData.split('\n').map((line) => line.replace(new RegExp(from, 'g'), to).replace(/[^ -~]/g, '')).join('\n')
+  return fileData.split('\n').map((line) => line.replace(new RegExp(from, 'g'), to)).join('\n')
 }
 
 async function renderTo (filePath, from, to) {
@@ -40,10 +40,11 @@ async function renderTo (filePath, from, to) {
 
   try {
     const fileData = await readFile(filePath, 'utf8')
+    const hasMatch = fileData.includes(from)
 
-    log(filePath, fileData.includes(from) || /[^ -~]/.test(fileData))
+    log(filePath, hasMatch)
 
-    if (fileData.includes(from) || /[^ -~]/.test(fileData)) await writeFile(filePath, transform(fileData, from, to), 'utf8')
+    if (hasMatch) await writeFile(filePath, transform(fileData, from, to), 'utf8')
   } catch (e) {
     handleRenderError(filePath, e)
   }
@@ -55,7 +56,9 @@ function getMatch (from, to) {
   return async function match (filePath) {
     info('match')
 
-    for (const f of genFrom([...from])) await renderTo(filePath, f, to)
+    const F = [...from].filter(Boolean)
+
+    for (const f of genFrom(F)) await renderTo(filePath, f, to)
   }
 }
 
