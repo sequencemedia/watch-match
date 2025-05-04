@@ -14,8 +14,8 @@ const error = debug('@sequencemedia/watch-match:error')
 const info = debug('@sequencemedia/watch-match:info')
 
 const DEFAULT_ERROR_MESSAGE = 'No error message defined'
-const NL = '\n'
 const CR = '\r'
+const LF = '\n'
 
 function handleRenderError (filePath, {
   message = DEFAULT_ERROR_MESSAGE
@@ -48,7 +48,7 @@ function mapTransformFromTo (from, to) {
 function transform (fileData, from, to) {
   info('transform')
 
-  return fileData.split(CR).map(mapTransformFromTo(from, to)).join(CR).trim() + NL
+  return (fileData.includes(CR) ? fileData.split(CR) : fileData.split(LF)).map(mapTransformFromTo(from, to)).join(LF).trim() + LF
 }
 
 async function renderTo (filePath, from, to) {
