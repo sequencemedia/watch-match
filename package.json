@@ -38,12 +38,12 @@
     "url": "https://github.com/sequencemedia/watch-match/issues"
   },
   "scripts": {
+    "kill-me-now": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=production node kill-me-now.mjs",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky",
     "start": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=production node app.mjs",
-    "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development node app.mjs",
-    "kill-me-now": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=production node kill-me-now.mjs"
+    "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development node app.mjs"
   },
   "dependencies": {
     "@sequencemedia/lsof": "^0.0.2",
@@ -59,9 +59,9 @@
     "husky": "^9.1.7"
   },
   "imports": {
-    "#where-am-i": "./where-am-i.mjs",
     "#watch-match": "./src/index.mjs",
-    "#watch-match/normalise": "./src/normalise.mjs"
+    "#watch-match/normalise": "./src/normalise.mjs",
+    "#where-am-i": "./where-am-i.mjs"
   },
   "exports": {
     ".": "./src/index.mjs",

@@ -1,3 +1,6 @@
+/**
+ *  @typedef {import('chokidar').FSWatcher} FSWatcher
+ */
 import debug from 'debug'
 
 import chokidar from 'chokidar'
@@ -88,8 +91,8 @@ function ignored (filePath, stat) {
 }
 
 /**
- *  Assuming that the file system path being watched is a directory,
- *  and it contains text files (of whatever file type)
+ *  The file system path being watched is a directory, and it should contain text
+ *  files (of whatever file type)
  *
  *  Parameter `path` is the file system path to watch. It should be a
  *  directory path
@@ -108,7 +111,7 @@ function ignored (filePath, stat) {
  *  @param {string} path the file system path to watch
  *  @param {string | string[]} from the string/strings to match
  *  @param {string} to the string with which to replace the match
- *  @returns {chokidar.FSWatcher}
+ *  @returns {FSWatcher}
  */
 export default function watchMatch (path, from, to) {
   log('watchMatch')

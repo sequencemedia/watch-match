@@ -6,7 +6,7 @@ import {
   getLsofArray
 } from '@sequencemedia/lsof'
 
-import PATH from '#where-am-i'
+import hereIAm from '#where-am-i'
 
 const {
   env: {
@@ -28,8 +28,8 @@ function getHasPath (alpha) {
   }
 }
 
-function getHas (PATH) {
-  const hasPath = getHasPath(PATH)
+function getHas (path) {
+  const hasPath = getHasPath(path)
 
   return function has (files) {
     return (
@@ -38,8 +38,8 @@ function getHas (PATH) {
   }
 }
 
-function getReduce (PATH) {
-  const hasPath = getHasPath(PATH)
+function getReduce (path) {
+  const hasPath = getHasPath(path)
 
   return function reduce (accumulator, files) {
     return (
@@ -54,9 +54,9 @@ function filterForCommand ({ COMMAND }) {
   return COMMAND === 'node'
 }
 
-function getFilterForProcess (PIDS) {
+function getFilterForProcess (pid) {
   return function filterForProcess ({ PROCESS }) {
-    return !PIDS.includes(PROCESS)
+    return PROCESS !== pid
   }
 }
 
@@ -81,17 +81,13 @@ function forEach ({ PROCESS: pid }) {
 async function killMeNow () {
   const array = await getLsofArray()
 
-  if (array.some(getHas(PATH))) {
+  if (array.some(getHas(hereIAm))) {
     const {
       pid
     } = process
 
-    const PIDS = [
-      pid
-    ]
-
-    const reduce = getReduce(PATH)
-    const filterForProcess = getFilterForProcess(PIDS)
+    const reduce = getReduce(hereIAm)
+    const filterForProcess = getFilterForProcess(pid)
 
     array
       .reduce(reduce, [])
