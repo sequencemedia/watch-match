@@ -46,7 +46,7 @@
     "kill-me-now": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=production node kill-me-now.mjs"
   },
   "dependencies": {
-    "@sequencemedia/lsof": "^0.0.0",
+    "@sequencemedia/lsof": "^0.0.2",
     "chokidar": "^4.0.3",
     "commander": "^13.1.0",
     "cross-env": "^7.0.3",
