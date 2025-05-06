@@ -18,4 +18,4 @@ const {
   pid
 } = process
 
-export default killMeNow(hereIAm, pid) // , 'node')
+export default killMeNow(hereIAm, pid)
