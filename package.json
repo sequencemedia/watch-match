@@ -31,9 +31,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sequencemedia/watch-match.git"
+    "url": "git+https://github.com/sequencemedia/watch-match.git"
   },
-  "homepage": "https://github.com/sequencemedia/watch-match",
+  "homepage": "https://github.com/sequencemedia/watch-match#readme",
   "bugs": {
     "url": "https://github.com/sequencemedia/watch-match/issues"
   },
