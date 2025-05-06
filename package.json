@@ -1,6 +1,6 @@
 {
   "name": "@sequencemedia/watch-match",
-  "version": "1.5.2",
+  "version": "1.5.5",
   "description": "Watch files and transform their content",
   "keywords": [
     "watch",
@@ -31,9 +31,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sequencemedia/watch-match.git"
+    "url": "git+https://github.com/sequencemedia/watch-match.git"
   },
-  "homepage": "https://github.com/sequencemedia/watch-match",
+  "homepage": "https://github.com/sequencemedia/watch-match#readme",
   "bugs": {
     "url": "https://github.com/sequencemedia/watch-match/issues"
   },
@@ -46,11 +46,11 @@
     "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development node app.mjs"
   },
   "dependencies": {
-    "@sequencemedia/lsof": "^0.0.3",
     "chokidar": "^4.0.3",
     "commander": "^13.1.0",
     "cross-env": "^7.0.3",
-    "debug": "^4.4.0"
+    "debug": "^4.4.0",
+    "kill-me-now": "^0.0.2"
   },
   "devDependencies": {
     "@sequencemedia/eslint-config-standard": "^0.2.53",
