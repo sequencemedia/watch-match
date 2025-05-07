@@ -8,7 +8,8 @@ From the command line
 npm start -- \
   --path '~/Documents/m3u' \
   --from '/Users/sequencemedia/Music/m4a' \
-  --to '/Volumes/Audio/Assets'
+  --to '/Volumes/Audio/Assets' \
+  --type 'm3u'
 ```
 
 Or with the default export
@@ -19,8 +20,9 @@ import watchMatch from '@sequencemedia/watch-match'
 const path = '~/Documents/m3u'
 const from = '/Users/sequencemedia/Music/m4a'
 const to = '/Volumes/Audio/Assets'
+const type = 'm3u'
 
-watchMatch(path, from, to)
+watchMatch(path, from, to, type)
 ```
 
 For example, You have an application generating `m3u` files. Each file is written to a directory
