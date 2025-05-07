@@ -18,4 +18,8 @@ const {
   pid
 } = process
 
-export default killMeNow(hereIAm, pid)
+const log = debug('@sequencemedia/watch-match:kill-me-now')
+
+log('`watch-match` is awake')
+
+export default killMeNow(hereIAm, pid, 'node')
