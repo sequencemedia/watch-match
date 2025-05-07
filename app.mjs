@@ -47,6 +47,7 @@ async function app () {
       .requiredOption('-p, --path [path]', 'Path to watch')
       .requiredOption('-f, --from [froms...]', 'Change `from` value(s)')
       .requiredOption('-t, --to [to]', 'Change `to` value')
+      .option('--type [type]', 'File type to watch')
       .parse(argv)
   } catch (e) {
     const {
@@ -64,17 +65,19 @@ async function app () {
   const {
     path,
     from,
-    to
+    to,
+    type
   } = commander.opts()
 
   log({
     path,
     from,
-    to
+    to,
+    type
   })
 
   try {
-    watchMatch(path, from, to)
+    watchMatch(path, from, to, type)
   } catch ({ message }) {
     const error = debug('@sequencemedia/watch-match:error')
 

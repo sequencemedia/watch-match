@@ -1,5 +1,6 @@
 /**
  *  @typedef {import('chokidar').FSWatcher} FSWatcher
+ *  @typedef {import('node:fs').Stats} Stats
  */
 import debug from 'debug'
 
@@ -85,9 +86,32 @@ function getMatch (from, to) {
 
 log('`watch-match` is awake')
 
-function ignored (filePath, stat) {
-  if (filePath && stat) return (!filePath.endsWith('.m3u8')) && stat.isFile()
-  return false
+/**
+ *
+ * @param {string} [fileType]
+ * @returns {(filePath?: string, stats?: Stats) => boolean | () => false}
+ */
+function getIgnored (fileType) {
+  if (fileType) {
+    const extension = '.' + fileType
+
+    return function ignored (filePath, stats) {
+      if (filePath && stats) {
+        /**
+         *  "when `filePath` DOES NOT end with the extension type we are watching RETURN TRUE"
+         */
+        return (
+          stats.isFile() &&
+          !filePath.endsWith(extension)
+        )
+      }
+      return false
+    }
+  }
+
+  return function ignored () {
+    return false
+  }
 }
 
 /**
@@ -111,20 +135,21 @@ function ignored (filePath, stat) {
  *  @param {string} path the file system path to watch
  *  @param {string | string[]} from the string/strings to match
  *  @param {string} to the string with which to replace the match
+ *  @param {string} [type] the file type to watch
  *  @returns {FSWatcher}
  */
-export default function watchMatch (path, from, to) {
+export default function watchMatch (path, from, to, type) {
   log('watchMatch')
 
   const watch = normalise(path)
   const match = (
     Array.isArray(from)
-      ? getMatch([...from], to) // shallow
-      : getMatch([from], to) // enarrayify
+      ? getMatch([...from], to, type) // shallow
+      : getMatch([from], to, type) // enarrayify
   )
 
   return (
-    chokidar.watch(watch, { awaitWriteFinish: true, ignored })
+    chokidar.watch(watch, { awaitWriteFinish: true, ignored: getIgnored(type) })
       .on('add', match)
       .on('change', match)
       .on('error', handleWatchError)
