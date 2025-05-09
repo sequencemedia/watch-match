@@ -87,9 +87,8 @@ function getMatch (from, to) {
 log('`watch-match` is awake')
 
 /**
- *
- * @param {string} [fileType]
- * @returns {(filePath?: string, stats?: Stats) => boolean | () => false}
+ *  @param {string} [fileType]
+ *  @returns {(filePath?: string, stats?: Stats) => boolean | () => false}
  */
 function getIgnored (fileType) {
   if (fileType) {
@@ -128,7 +127,9 @@ function getIgnored (fileType) {
  *
  *  In its simplest form:
  *
+ *  ```javascript
  *     fileData.replace(new RegExp(from, 'g'), to)
+ *  ```
  *
  *  Where `fileData` is the contents of a file contained in directory `path`
  *

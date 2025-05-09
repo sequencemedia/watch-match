@@ -1,22 +1,14 @@
 #!/usr/bin/env node
 
-import debug from 'debug'
-
 import {
   Command
 } from 'commander'
 
+import debug from '#debug'
+
 import watchMatch from '#watch-match'
 
 import PACKAGE from './package.json' with { type: 'json' }
-
-const {
-  env: {
-    DEBUG = '@sequencemedia/watch-match*'
-  }
-} = process
-
-if (DEBUG) debug.enable(DEBUG)
 
 const log = debug('@sequencemedia/watch-match')
 

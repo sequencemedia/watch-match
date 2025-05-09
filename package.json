@@ -61,7 +61,8 @@
   "imports": {
     "#watch-match": "./src/index.mjs",
     "#watch-match/normalise": "./src/normalise.mjs",
-    "#where-am-i": "./where-am-i.mjs"
+    "#where-am-i": "./where-am-i.mjs",
+    "#debug": "./src/debug.mjs"
   },
   "exports": {
     ".": "./src/index.mjs",
