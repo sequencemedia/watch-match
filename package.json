@@ -50,7 +50,7 @@
     "commander": "^13.1.0",
     "cross-env": "^7.0.3",
     "debug": "^4.4.1",
-    "kill-me-now": "^0.0.18"
+    "kill-me-now": "^0.0.19"
   },
   "devDependencies": {
     "@sequencemedia/eslint-config-standard": "^0.2.57",
