@@ -1,6 +1,6 @@
 {
   "name": "@sequencemedia/watch-match",
-  "version": "1.6.87",
+  "version": "1.6.88",
   "description": "Watch files and transform their content",
   "keywords": [
     "watch",
