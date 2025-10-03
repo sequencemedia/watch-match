@@ -14,6 +14,10 @@ const log = debug('@sequencemedia/watch-match')
 
 log('`watch-match` is awake')
 
+const {
+  table
+} = console
+
 async function app () {
   const {
     pid
@@ -61,7 +65,7 @@ async function app () {
     type
   } = commander.opts()
 
-  log({
+  table({
     path,
     from,
     to,
