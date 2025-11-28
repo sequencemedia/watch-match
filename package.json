@@ -46,14 +46,14 @@
     "start:dev": "cross-env NODE_OPTIONS=\"--no-warnings\" NODE_ENV=development node app.mjs"
   },
   "dependencies": {
-    "chokidar": "^4.0.3",
+    "chokidar": "^5.0.0",
     "commander": "^14.0.2",
     "cross-env": "^10.1.0",
     "debug": "^4.4.3",
-    "kill-me-now": "^0.0.131"
+    "kill-me-now": "^0.0.132"
   },
   "devDependencies": {
-    "@sequencemedia/eslint-config-standard": "^0.2.105",
+    "@sequencemedia/eslint-config-standard": "^0.2.107",
     "eslint": "9.38.0",
     "globals": "^16.5.0",
     "husky": "^9.1.7"
